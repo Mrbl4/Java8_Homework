@@ -6,7 +6,7 @@ public class App {
 
     List<Person> persons = new ArrayList<>();
 
-    public void readPersons(){
+    public void readPersons() {
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/resources/in.txt"));
@@ -25,25 +25,27 @@ public class App {
         }
     }
 
-    public void listPersons(){
-//        try (FileOutputStream fos = new FileOutputStream("src/main/resources/out.txt");
-//             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fos)){
-//                    for(Person p: persons) {
-//                    objectOutputStream.writeBytes(p.getFirstName() + " " + p.getLastName());
-//                    //objectOutputStream.writeObject(p);}
-            try{
-               PrintWriter out = new PrintWriter(new FileWriter("src/main/resources/out.txt"));
-               for (Person p: persons){
-                   //System.out.println(p.getFirstName() + " " + p.getLastName());
-                    out.write(p.getFirstName() + " " + p.getLastName());
-                }
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+    public void listPersons() {
+
+        PrintWriter out = null;
+
+        try {
+
+            out = new PrintWriter(new FileWriter("src/main/resources/out.txt"));
+
+            for (Person p : persons) {
+                out.write(p.getFirstName() + " " + p.getLastName());
+                out.println();
             }
-
-
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (out != null) {
+                out.close();
+            }
         }
     }
+}
 
