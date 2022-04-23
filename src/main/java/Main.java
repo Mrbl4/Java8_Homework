@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Month;
 
 public class Main {
 
@@ -6,6 +7,6 @@ public class Main {
 
         App app = new App();
         app.readPersons();
-        app.listPersons();
+        app.listPersons(Month.MAY);
     }
 }

@@ -1,5 +1,7 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
 
@@ -16,28 +18,12 @@ public class Person implements Serializable {
         this.dateOfBirth = LocalDate.of(parseInt(array1[0]), parseInt(array1[1]), parseInt(array1[2]));
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
         return lastName;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
     }
 
     @Override
@@ -47,5 +33,23 @@ public class Person implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, dateOfBirth);
     }
 }
